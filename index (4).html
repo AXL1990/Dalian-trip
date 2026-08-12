@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>山海之城·大连 — 全家送学七日手册</title>
+<style>
+  :root{
+    color-scheme: light;
+    --page:#eaecef; --surface:#ffffff; --surface-2:#f7f8fa;
+    --ink:#141821; --sec:#565d68; --muted:#8b929c;
+    --grid:#e8eaed; --axis:#c9ced5; --hair:rgba(15,20,30,.09);
+    --accent:#2a6fd6; --hot:#c33227;
+    --sea:#2a78d6; --warm:#eb6834; --leaf:#1baf7a; --gold:#eda100;
+    --good:#0a7d3a;
+    --shadow:0 1px 2px rgba(15,20,30,.05),0 8px 24px rgba(15,20,30,.05);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:where(:not([data-theme="light"])){
+      color-scheme:dark;
+      --page:#0c0e11; --surface:#171a1f; --surface-2:#1d2127;
+      --ink:#f1f3f6; --sec:#b4bbc5; --muted:#868d97;
+      --grid:#262a31; --axis:#3a4048; --hair:rgba(255,255,255,.10);
+      --accent:#4088e8; --hot:#e26150;
+      --sea:#3987e5; --warm:#e5904f; --leaf:#1bab77; --gold:#c98500;
+      --good:#33b866;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--page); color:var(--ink);
+    font-family:system-ui,-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+    line-height:1.6; -webkit-font-smoothing:antialiased;
+    font-variant-numeric:tabular-nums;
+  }
+  .wrap{max-width:1160px;margin:0 auto;padding:clamp(20px,4vw,52px) clamp(16px,4vw,40px) 72px}
+  .eyebrow{font-size:12px;font-weight:650;letter-spacing:.35em;color:var(--accent)}
+  h1{font-size:clamp(30px,5vw,48px);line-height:1.12;font-weight:760;letter-spacing:.04em;margin:.35em 0 .3em;text-wrap:balance}
+  .dek{font-size:clamp(15px,2vw,18px);color:var(--sec);max-width:62ch;margin:0}
+  .meta{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:22px;font-size:12.5px;color:var(--muted)}
+  .meta b{color:var(--sec);font-weight:600}
+  .rule{height:1px;background:var(--hair);border:0;margin:30px 0}
+
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:26px 0 4px}
+  @media(max-width:720px){.tiles{grid-template-columns:1fr}}
+  .tile{background:var(--surface);border:1px solid var(--hair);border-radius:14px;padding:20px 20px 18px;box-shadow:var(--shadow)}
+  .tile .k{font-size:12px;font-weight:600;letter-spacing:.12em;color:var(--muted)}
+  .tile .v{font-size:clamp(30px,4.2vw,40px);font-weight:750;letter-spacing:-.01em;line-height:1.1;margin:8px 0 6px}
+  .tile .v small{font-size:.48em;font-weight:600;color:var(--sec);letter-spacing:.05em}
+  .tile .d{font-size:13px;color:var(--sec);line-height:1.5}
+  .tile.hot .v{color:var(--hot)}
+
+  .card{background:var(--surface);border:1px solid var(--hair);border-radius:16px;padding:clamp(18px,2.5vw,28px);box-shadow:var(--shadow);margin-top:22px}
+  .card h2{font-size:clamp(18px,2.4vw,22px);font-weight:700;letter-spacing:.01em;margin:0 0 4px;text-wrap:balance}
+  .card .sub{font-size:13.5px;color:var(--muted);margin:0 0 16px}
+  .card .note{font-size:13.5px;color:var(--sec);line-height:1.7;margin:14px 0 0;border-top:1px solid var(--hair);padding-top:14px;max-width:80ch}
+  .card .note b{color:var(--ink);font-weight:650}
+
+  .legend{display:flex;flex-wrap:wrap;gap:12px 18px;margin:2px 0 12px;font-size:13px;color:var(--sec)}
+  .legend .it{display:inline-flex;align-items:center;gap:7px}
+  #wx_legend .it{cursor:pointer;border-radius:6px;padding:2px 4px}
+  #wx_legend .it:hover{background:var(--surface-2)}
+  .legend .sw{width:15px;height:11px;border-radius:3px;flex:none}
+  .legend .sw.ln{height:3px;border-radius:2px}
+
+  /* 控件 */
+  .controls{display:flex;flex-wrap:wrap;gap:14px 18px;align-items:center;margin:0 0 18px}
+  .ctl{display:flex;align-items:center;gap:9px}
+  .ctl label{font-size:12px;font-weight:600;letter-spacing:.14em;color:var(--muted)}
+  select{font:inherit;font-size:14px;font-weight:600;color:var(--ink);background:var(--surface-2);
+    border:1px solid var(--hair);border-radius:9px;padding:8px 30px 8px 12px;cursor:pointer;
+    appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);
+    background-position:calc(100% - 16px) 55%,calc(100% - 11px) 55%;background-size:5px 5px,5px 5px;background-repeat:no-repeat}
+  .toggle{display:inline-flex;background:var(--surface-2);border:1px solid var(--hair);border-radius:9px;padding:3px}
+  .toggle button{font:inherit;font-size:13px;font-weight:600;color:var(--sec);background:none;border:0;border-radius:7px;padding:6px 13px;cursor:pointer}
+  .toggle button[aria-pressed="true"]{background:var(--accent);color:#fff}
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .chips button{font:inherit;font-size:12.5px;font-weight:600;color:var(--sec);background:var(--surface-2);border:1px solid var(--hair);border-radius:20px;padding:5px 12px;cursor:pointer}
+  .chips button[aria-pressed="true"]{background:var(--hot);color:#fff;border-color:transparent}
+  select:focus-visible,.toggle button:focus-visible,.chips button:focus-visible,.flight-h:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  svg{display:block;width:100%;height:auto;overflow:visible}
+  .gl{stroke:var(--grid);stroke-width:1}
+  .axl{stroke:var(--axis);stroke-width:1}
+  .tick{fill:var(--muted);font-size:11px}
+  .tick.y{text-anchor:end}
+  .line{fill:none;stroke-width:2.4;stroke-linejoin:round;stroke-linecap:round;transition:opacity .2s}
+  .rainbar{fill:var(--leaf);opacity:.28;transition:opacity .2s}
+  .cross{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3}
+  .foc{stroke:var(--surface);stroke-width:2}
+
+  /* 航班卡 */
+  .flights{display:grid;gap:12px}
+  .flight{border:1px solid var(--hair);border-radius:13px;background:var(--surface-2);overflow:hidden}
+  .flight.key{border-color:var(--hot)}
+  .flight-h{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline;width:100%;text-align:left;
+    font:inherit;background:none;border:0;cursor:pointer;padding:13px 16px;color:var(--ink)}
+  .flight-h .rt{font-weight:750;font-size:15px}
+  .flight-h .fno{font-size:12.5px;font-weight:650;color:var(--accent)}
+  .flight.key .flight-h .fno{color:var(--hot)}
+  .flight-h .fd{font-size:12.5px;color:var(--muted);font-weight:600}
+  .flight-h .arrow{margin-left:auto;color:var(--muted);font-size:12px;transition:transform .2s}
+  .flight.open .flight-h .arrow{transform:rotate(180deg)}
+  .flight-b{display:none;padding:0 16px 14px;border-top:1px dashed var(--hair)}
+  .flight.open .flight-b{display:block}
+  .seg{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:12px 0 4px;font-variant-numeric:tabular-nums}
+  .seg .tp{font-size:22px;font-weight:750}
+  .seg .ap{font-size:12.5px;color:var(--sec)}
+  .seg .dur{font-size:12px;color:var(--muted);border-bottom:1px dashed var(--axis);padding:0 14px 3px;text-align:center}
+  .frow{font-size:13px;color:var(--sec);margin:7px 0;line-height:1.65}
+  .frow b{color:var(--ink);font-weight:650}
+  .warn{font-size:12.8px;color:var(--hot);background:color-mix(in srgb,var(--hot) 8%,transparent);
+    border:1px solid color-mix(in srgb,var(--hot) 30%,transparent);border-radius:9px;padding:8px 11px;margin-top:9px;line-height:1.6}
+
+  /* 名单卡片 */
+  .people{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:10px;margin-top:4px}
+  .person{border:1px solid var(--hair);border-radius:12px;background:var(--surface-2);padding:11px 13px 12px;position:relative}
+  .person .no{position:absolute;top:9px;right:11px;font-size:11.5px;font-weight:650;color:var(--muted)}
+  .person .pn{font-weight:700;font-size:15px;padding-right:30px}
+  .person .pr{font-size:12.3px;color:var(--sec);margin-top:4px;line-height:1.5}
+  .badge{display:inline-block;font-size:11px;font-weight:650;color:#fff;background:var(--accent);border-radius:5px;padding:1px 7px;margin-top:7px;margin-right:5px}
+  .badge.hot{background:var(--hot)}
+  .badge.soft{background:var(--surface);color:var(--sec);border:1px solid var(--hair)}
+  .badge.care{background:var(--warm)}
+  .person.hl{border-color:var(--hot);box-shadow:0 0 0 1px var(--hot) inset}
+  .person.hl .pn{color:var(--hot)}
+  .count{font-size:13px;color:var(--muted);margin:2px 0 10px}
+  .count b{color:var(--ink)}
+
+  /* 条形排行 */
+  .barrow{display:grid;grid-template-columns:150px 1fr 96px auto;align-items:center;gap:12px;margin:8px 0;font-size:13.5px;cursor:default}
+  @media(max-width:560px){.barrow{grid-template-columns:96px 1fr 70px auto;gap:8px}}
+  .navlinks{display:inline-flex;gap:5px;flex:none}
+  .navlinks a{font-size:11px;font-weight:650;text-decoration:none;color:var(--accent);
+    border:1px solid color-mix(in srgb,var(--accent) 40%,transparent);border-radius:6px;padding:2px 7px;white-space:nowrap}
+  .navlinks a:hover{background:var(--accent);color:#fff}
+  .navlinks a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .qnav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+  .qnav .qn{display:inline-flex;align-items:center;gap:8px;background:var(--surface-2);border:1px solid var(--hair);
+    border-radius:10px;padding:6px 11px;font-size:12.8px;color:var(--sec)}
+  .qnav .qn b{color:var(--ink);font-weight:650}
+  .barrow .nm{color:var(--sec);text-align:right;font-weight:550}
+  .barrow.hl .nm{color:var(--hot);font-weight:750}
+  .bartrack{position:relative;height:21px;background:var(--surface-2);border-radius:6px;overflow:hidden}
+  .barfill{position:absolute;left:0;top:0;bottom:0;background:var(--accent);border-radius:6px;transition:width .9s cubic-bezier(.22,1,.36,1)}
+  .barrow.hl .barfill{background:var(--hot)}
+  .barval{font-weight:650;color:var(--ink);text-align:right}
+  .barrow.hl .barval{color:var(--hot)}
+  .barrow:hover .bartrack{outline:1px solid var(--axis)}
+
+  /* 行程时间轴 */
+  .stayband{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;font-size:12.5px}
+  .stayband span{background:var(--surface-2);border:1px solid var(--hair);border-radius:8px;padding:5px 11px;color:var(--sec)}
+  .stayband b{color:var(--ink)}
+  .days{display:grid;gap:14px;margin-top:6px}
+  .day{border:1px solid var(--hair);border-radius:13px;background:var(--surface-2);padding:14px 16px}
+  .day.key{border-color:var(--hot)}
+  .day h3{margin:0 0 8px;font-size:15px;font-weight:700;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .day h3 .dn{color:var(--accent);letter-spacing:.06em}
+  .day.key h3 .dn{color:var(--hot)}
+  .day h3 .dt{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.06em}
+  .day h3 .stay{margin-left:auto;font-size:11.5px;font-weight:600;color:var(--good)}
+  .stops{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+  .stops li{display:grid;grid-template-columns:52px 1fr;gap:10px;font-size:13.5px;color:var(--sec)}
+  .stops .tm{color:var(--muted);font-weight:650;font-size:12px;letter-spacing:.08em;padding-top:1px}
+  .stops b{color:var(--ink);font-weight:650}
+  .stops .go{display:block;font-size:12.3px;color:var(--muted);margin-top:2px;line-height:1.55}
+  body.hidego .stops .go{display:none}
+
+  /* 美食卡片 */
+  .foods{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-top:4px}
+  .food{border:1px solid var(--hair);border-radius:12px;background:var(--surface-2);padding:13px 14px;cursor:default;transition:transform .18s ease,box-shadow .18s ease}
+  .food:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .food .fn{font-weight:700;font-size:14px}
+  .food .fp{font-size:12px;color:var(--accent);font-weight:650;margin-top:2px}
+  .food .ft{font-size:12.5px;color:var(--sec);margin-top:6px;line-height:1.55}
+
+  /* 预算汇总 */
+  .sumline{display:flex;flex-wrap:wrap;gap:8px 26px;align-items:baseline;margin-top:14px;font-size:13.5px;color:var(--sec)}
+  .sumline .big{font-size:26px;font-weight:750;color:var(--hot)}
+  .sumline b{color:var(--ink)}
+
+  .tt{position:fixed;pointer-events:none;z-index:50;background:var(--surface);border:1px solid var(--hair);
+     border-radius:10px;box-shadow:var(--shadow);padding:9px 11px;font-size:12.5px;opacity:0;transition:opacity .1s;min-width:150px;max-width:250px}
+  .tt .tq{font-weight:700;margin-bottom:5px;font-size:12px;color:var(--muted);letter-spacing:.06em}
+  .tt .r{display:flex;align-items:center;gap:10px;justify-content:space-between;margin:2px 0}
+  .tt .r .lft{display:flex;align-items:center;gap:7px;color:var(--sec)}
+  .tt .r .dot{width:9px;height:9px;border-radius:2px;flex:none}
+  .tt .r .val{font-weight:700;color:var(--ink)}
+  .tt .tip{color:var(--sec);margin-top:5px;border-top:1px solid var(--hair);padding-top:5px;line-height:1.55}
+
+  footer{margin-top:34px;font-size:12.5px;color:var(--muted);line-height:1.7}
+  footer b{color:var(--sec)}
+  .files{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .chip{font-size:12px;background:var(--surface-2);border:1px solid var(--hair);border-radius:7px;padding:4px 10px;color:var(--sec)}
+
+  @media (prefers-reduced-motion:reduce){
+    .barfill,.food,.flight-h .arrow{transition:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">全家送学 · 八月二十四日至三十日</div>
+    <h1>山海之城 · 大连</h1>
+    <p class="dek">八月二十九日,<b>雷林生</b>到<b>大连海事大学</b>报到。二十三口人分<b>三路</b>奔赴滨城:二姨、六姨两家十口先取道沈阳,兰州四人直飞,上海六人南来——八月二十四日在星海湾会师,三十日各自返程。大姨领着二姨、四姨、五姨、六姨,<b>五位姨妈是亲姐妹</b>;加上几位姨夫,团里<b>八位长辈</b>都过了六十,大姨和二姨夫妇更已<b>年过七旬</b>——行程节奏专门为他们留了余量。这份手册把航班、名单、逐日行程与预算逐项核对后放在一起,每一页都为这一趟专门定制。</p>
+    <div class="meta">
+      <span><b>会师日</b> 八月二十四日 · 大连周水子机场</span>
+      <span><b>报到日</b> 八月二十九日 · 大连海事大学</span>
+      <span><b>返程日</b> 八月三十日</span>
+      <span><b>住宿</b> 前两晚东港威尼斯酒店 · 后四晚星海广场</span>
+    </div>
+  </header>
+
+  <div class="tiles">
+    <div class="tile">
+      <div class="k">同行人数 · 三路抵连</div>
+      <div class="v">23<small> 人</small></div>
+      <div class="d">三个批次二十四日齐聚;八位长辈、三位年过七旬,每天只排一个主项。</div>
+    </div>
+    <div class="tile hot">
+      <div class="k">报到日 · 主角</div>
+      <div class="v">8·29<small> 雷林生</small></div>
+      <div class="d">送学组九人上午进校;其余家人就在隔壁黑石礁公园、自然博物馆,下午海纳百川会合。</div>
+    </div>
+    <div class="tile">
+      <div class="k">人均全程预算(七天,测算)</div>
+      <div class="v" id="t3">—<small> 元</small></div>
+      <div class="d" id="t3d">地面开销测算,不含机票;档次与人数可在下方切换。</div>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <!-- 一、抵连三路 -->
+  <section class="card">
+    <h2>一 · 三路抵连 — 航班与批次总览</h2>
+    <p class="sub">点开任意一条查看票面出行人、时刻与专属提醒 · 票面信息取自已出票订单截图</p>
+    <div class="flights" id="flights"></div>
+    <p class="note"><b>一处票面姓名请务必核对。</b>兰州直飞订单票面写作「张<b>莲风</b>」,名单为「张<b>莲凤</b>」——一字之差,值机与安检都以<b>身份证件</b>为准,出发前请对照证件确认,不符就尽早联系平台改名,免得柜台受阻(上海订单的「彭珺瑶」已确认为孩子学名,无需处理)。<b>各家出发前一晚请清点随身药</b>:不只下文点名的四位,凡有慢性病或常用药的,按七天量再多备两天,连同处方或药盒说明一起放<b>随身行李</b>(托运万一延误就断顿了);孩子的退烧药、晕车贴也各家自备一份。二姨、六姨两家的沈阳转连车次与二十一至二十三号三位亲友的票务确认后,告诉我一声即可补进这张表。</p>
+  </section>
+
+  <!-- 二、名单 -->
+  <section class="card">
+    <h2>二 · 谁同行 — 二十三人名单与亲缘</h2>
+    <p class="sub">按家庭分支或出发批次筛选,或只看八月二十九日进校送学的九人</p>
+    <div class="controls">
+      <div class="chips" id="branchChips"></div>
+    </div>
+    <div class="controls">
+      <div class="ctl"><label>出发批次</label>
+        <div class="toggle" id="batchTog">
+          <button data-t="全部" aria-pressed="true">全部</button>
+          <button data-t="沈阳中转" aria-pressed="false">沈阳中转</button>
+          <button data-t="兰州直飞" aria-pressed="false">兰州直飞</button>
+          <button data-t="上海出发" aria-pressed="false">上海出发</button>
+        </div>
+      </div>
+      <div class="ctl"><label>范围</label>
+        <div class="toggle" id="uniTog">
+          <button data-u="all" aria-pressed="true">全员</button>
+          <button data-u="uni" aria-pressed="false">仅送学组(15–23号)</button>
+          <button data-u="care" aria-pressed="false">重点关照</button>
+        </div>
+      </div>
+    </div>
+    <div class="count" id="pcount"></div>
+    <div class="people" id="people"></div>
+    <p class="note"><b>看点。</b>这趟的底色是姨妈们的一场团聚:<b>大姨是五位姨妈中的长姐,已年过七旬</b>,领着二、四、五、六四位亲妹妹;二姨和二姨夫也都过了七十,加上几位姨夫,八位长辈都上了年纪——所以整份行程每天只排一个主项、场馆优先室内、坡路一律可绕,凡标注「可歇脚」「可等候」的地方,大姨同样优先。四位需要多留心:<b>五姨夫安文明</b>心脏不好、忌劳累,走累了随时坐;<b>大姨、二姨</b>都有高血压,降压药按时吃、早晚别落;<b>二姨夫</b>有糖尿病,正餐别拖点、随身带加餐。主线仍是二姨一支送<b>雷林生</b>入学;雪莲这边的三位也都到齐了:母亲金凤存,舅舅金茂栋、舅母冶金莲——他们随哪一路出发,确认后我改一行就更新批次。</p>
+  </section>
+
+  <!-- 三、气候 -->
+  <section class="card">
+    <h2>三 · 天气如何 — 八月末正是大连的好时候</h2>
+    <p class="sub">月平均高温 / 低温(摄氏度)与月降水量(毫米) · 将指针移到图上查看逐月数据</p>
+    <div class="controls">
+      <div class="ctl"><label>降水柱</label>
+        <div class="toggle" id="rainTog">
+          <button data-r="1" aria-pressed="true">显示</button>
+          <button data-r="0" aria-pressed="false">隐藏</button>
+        </div>
+      </div>
+    </div>
+    <div class="legend" id="wx_legend">
+      <span class="it" data-k="hi"><span class="sw ln" style="background:var(--warm)"></span>平均高温</span>
+      <span class="it" data-k="lo"><span class="sw ln" style="background:var(--sea)"></span>平均低温</span>
+      <span class="it" data-k="rain"><span class="sw" style="background:var(--leaf);opacity:.4"></span>降水量</span>
+    </div>
+    <div id="wx_chart"></div>
+    <p class="note"><b>对这趟的意义。</b>八月二十四日至三十日正处在雨季尾声:白天二十六七度、早晚凉爽,海水是一年里最暖的时候,对老人和小娃都友好。圣亚与自然博物馆都在室内恒温,正午躲太阳刚好;给雷林生收拾行李时记得,大连九月中旬后海风就硬了,薄外套先备一件。</p>
+  </section>
+
+  <!-- 四、行程 -->
+  <section class="card">
+    <h2>四 · 七日实战行程 — 逐日逐段,交通到元</h2>
+    <p class="sub">按家庭定稿的行程规划表逐日落位 · 点日期胶囊单看某天;交通细节可一键收起 · 点「高德/百度」直接在地图上落针,再点「路线」即按实时路况算车程;微信里若点了没反应,右上角「⋯」选「在浏览器打开」再点即可</p>
+    <div class="controls">
+      <div class="chips" id="dayChips"></div>
+      <div class="ctl"><label>交通与费用细节</label>
+        <div class="toggle" id="goTog">
+          <button data-g="1" aria-pressed="true">显示</button>
+          <button data-g="0" aria-pressed="false">收起</button>
+        </div>
+      </div>
+    </div>
+    <div class="qnav" id="qnav"></div>
+    <div class="stayband">
+      <span><b>第一阶段</b> 八月二十四至二十五日 · 东港威尼斯酒店(两晚)—— 抵达即达东港商圈,去金石滩也更近</span>
+      <span><b>第二阶段</b> 八月二十六至三十日 · 星海广场(四晚)—— 棒棰岛、旅顺、圣亚、海事大学全在西线,不再挪窝</span>
+      <span><b>包车日</b> 二十五 / 二十六 / 二十七日连排三天 —— 行李随车、以车代步,八位长辈最省力</span>
+    </div>
+    <div class="days" id="days"></div>
+    <p class="note"><b>为什么这么排(定稿版)。</b>行程东西两开:前两晚驻<b>东港威尼斯酒店</b>,二十四日白天逛老城、夜里看东港水城夜景——三批人无论几点落地都赶得上这场会师;二十五日包车直插金石滩——定稿特别注明<b>早出发避返程堵车</b>;二十六日趁包车把行李捎上,看完棒棰岛与渔人码头日落,顺路西迁<b>星海广场</b>,之后四晚不挪窝。包车连排三天,旅顺一天更是大半程以车代步——<b>这套安排对八位长辈(大姨、二姨、二姨夫三位年过七旬)是最省力的走法</b>。二十九日报到日的三处配景(黑石礁公园、自然博物馆、海纳百川)全在海事大学隔壁,送学与等候的两拨人始终只隔一个路口。三十日兰州批六点四十五起飞,星海广场凌晨打车约三十分钟直达机场,前夜九点前休息即可。</p>
+  </section>
+
+  <!-- 五、景点 -->
+  <section class="card">
+    <h2>五 · 景点档案 — 行程内十站 + 备选两站</h2>
+    <p class="sub">按类型筛选、按指标排序 · 悬停任意条目查看门票、贴士与在行程中的位置</p>
+    <div class="controls">
+      <div class="chips" id="spotChips"></div>
+      <div class="ctl"><label>范围</label>
+        <div class="toggle" id="planTog">
+          <button data-o="all" aria-pressed="true">全部</button>
+          <button data-o="in" aria-pressed="false">仅行程内</button>
+        </div>
+      </div>
+      <div class="ctl"><label>排序依据</label>
+        <div class="toggle" id="sortTog">
+          <button data-s="score" aria-pressed="true">推荐指数</button>
+          <button data-s="hrs" aria-pressed="false">建议时长</button>
+        </div>
+      </div>
+    </div>
+    <div id="spots"></div>
+    <p class="note"><b>取舍(定稿版)。</b>最终行程把<b>金石滩和旅顺</b>都请了回来,各占一整天并配包车;海洋馆选<b>圣亚</b>一家看足,老虎滩留作备选、给下次;报到日周边三站是专门为送学那天配的顺路景,免费又都在海大步行圈。已确定的三张门票:金石滩六十元 + 棒棰岛二十元 + 圣亚二百四十元,合计约<b>三百二十元一人</b>,孩子多有半价或免票;自然博物馆免费但要预约,记得提前两天在公众号抢名额。</p>
+  </section>
+
+  <!-- 六、美食 -->
+  <section class="card">
+    <h2>六 · 吃什么 — 三条夜市各有分工</h2>
+    <p class="sub">悬停卡片查看点单贴士 · 价格为市区常见档位,仅供参考</p>
+    <div class="foods" id="foods"></div>
+    <p class="note"><b>觅食路线已排进行程。</b>二十四日晚<b>天津街</b>老字号开吃第一顿;二十五日傍晚<b>金石万巷</b>逛吃收尾;住东港那两天,<b>东港五街</b>的咖啡馆与小馆随时插空。八月末虾爬子和海胆正肥,海鲜认准当日到货的排档;焖子趁热吃外焦里糯,给华清和珺瑶一人来一份小份的。</p>
+  </section>
+
+  <!-- 七、预算 -->
+  <section class="card">
+    <h2>七 · 花多少钱 — 预算测算器</h2>
+    <p class="sub">七天口径的地面开销测算 · 机票已实付部分见下方说明</p>
+    <div class="controls">
+      <div class="ctl"><label>住宿方式</label>
+        <div class="toggle" id="stayTog">
+          <button data-m="hotel" aria-pressed="true">酒店拼房</button>
+          <button data-m="minsu" aria-pressed="false">整租民宿</button>
+        </div>
+      </div>
+      <div class="ctl"><label>出行档次</label>
+        <div class="toggle" id="gradeTog">
+          <button data-g="eco" aria-pressed="false">经济型</button>
+          <button data-g="mid" aria-pressed="true">舒适型</button>
+          <button data-g="high" aria-pressed="false">品质型</button>
+        </div>
+      </div>
+      <div class="ctl"><label for="pplPick">出行人数</label>
+        <select id="pplPick">
+          <option value="2">两人</option>
+          <option value="4">四人 · 一个小家</option>
+          <option value="9">九人 · 送学组</option>
+          <option value="23" selected>二十三人 · 全员</option>
+        </select>
+      </div>
+      <div class="ctl"><label>展示口径</label>
+        <div class="toggle" id="viewTog">
+          <button data-v="daily" aria-pressed="true">人均每日</button>
+          <button data-v="total" aria-pressed="false">全程总计</button>
+        </div>
+      </div>
+    </div>
+    <div id="budget"></div>
+    <div class="sumline" id="bsum"></div>
+    <p class="note"><b>口径说明。</b>上表为地面开销:住宿按双人及以上拼房折算;三岁的华清与几位学龄前小朋友多数场馆免票或半票,实际门票会低于测算;市内交通按行程里逐段标注的地铁与打车费估算。<b>整租民宿口径</b>:按八月旺季整套价折算人头(四居大平层约八百至一千二一晚住八到十人,独栋更高)——二十三人切到「整租民宿」通常比酒店拼房更省,还多出客厅厨房:烧水熬粥、二姨夫的按时加餐都方便,晚上姨妈们坐一起唠嗑不用挤酒店大堂。但三点务必确认:<b>旺季大户型紧俏要趁早订</b>;<b>选带电梯或低楼层的</b>,八位长辈爬楼吃不消;两三人小队整租就不划算了,切回酒店口径看。<b>机票另计</b>——兰州直飞四人往返已实付 ¥4141 + ¥3256,人均约 ¥1849;春秋航空返程<b>无免费托运行李额</b>,海产伴手礼要么控制随身重量,要么提前在线加购行李额,比柜台现补便宜得多。</p>
+  </section>
+
+  <footer>
+    <b>说明。</b>航班时刻与票面信息取自已出票订单,起飞前请以航司短信为准;气候为多年月均值;门票与价格随季节浮动,以官方渠道当日公示为准;报到流程以大连海事大学录取通知书及迎新公告为准。这份手册为这一趟专门整理:名单逐人核对、航班逐张比对、行程逐段量过距离和车费——祝雷林生前程似锦,祝全家一路顺风。<br>
+    <b>数据整理:</b>同行名单与航班订单由家人提供;行程依据自制路书逐日落位;气候与景区信息为公开资料人工汇编。
+    <div class="files">
+      <span class="chip">全部数据内嵌于本页,可离线打开</span>
+      <span class="chip">支持深色模式,跟随系统自动切换</span>
+      <span class="chip">沈阳航段与三位亲友票务确认后可随时补入</span>
+      <span class="chip"><b>版本:第十四版 · 八月十一日晚</b> —— 群里若见旧版,以此为准</span>
+    </div>
+  </footer>
+</div>
+
+<div class="tt" id="tt"></div>
+
+<script>
+/* ============ 数据 ============ */
+const PEOPLE = [
+  {i:1,  n:"张兰翠", b:"大姨",     g:"兰州直飞", r:"大姨 · 五位姨妈中的长姐", elder:true, eb:"年过七旬", care:"高血压 · 按时服药"},
+  {i:2,  n:"张莲凤", b:"四姨一支", g:"兰州直飞", r:"四姨", elder:true},
+  {i:3,  n:"化清儒", b:"四姨一支", g:"兰州直飞", r:"四姨之孙(儿子的儿子)"},
+  {i:4,  n:"化得莲", b:"四姨一支", g:"兰州直飞", r:"四姨长女"},
+  {i:5,  n:"安文明", b:"五姨一支", g:"上海出发", r:"五姨夫 · 张兰霞之夫", elder:true, care:"心脏不好 · 忌劳累"},
+  {i:6,  n:"张兰霞", b:"五姨一支", g:"上海出发", r:"五姨", elder:true},
+  {i:7,  n:"彭正弘", b:"四姨一支", g:"上海出发", r:"化得燕之夫"},
+  {i:8,  n:"化得燕", b:"四姨一支", g:"上海出发", r:"四姨幼女"},
+  {i:9,  n:"彭珺瑶", b:"四姨一支", g:"上海出发", r:"彭正弘、化得燕的孩子", age:"十一岁"},
+  {i:10, n:"彭华清", b:"四姨一支", g:"上海出发", r:"彭正弘、化得燕的孩子", age:"三岁"},
+  {i:11, n:"张兰梅", b:"六姨一支", g:"沈阳中转", r:"六姨", elder:true},
+  {i:12, n:"徐新莹", b:"六姨一支", g:"沈阳中转", r:"六姨夫", elder:true},
+  {i:13, n:"徐德浩", b:"六姨一支", g:"沈阳中转", r:"六姨夫妇之孙", age:"五至七岁"},
+  {i:14, n:"徐德泓", b:"六姨一支", g:"沈阳中转", r:"六姨夫妇之孙", age:"五至七岁"},
+  {i:15, n:"张兰芳", b:"二姨一支", g:"沈阳中转", r:"二姨", uni:true, elder:true, eb:"年过七旬", care:"高血压 · 按时服药"},
+  {i:16, n:"雷百让", b:"二姨一支", g:"沈阳中转", r:"二姨夫", uni:true, elder:true, eb:"年过七旬", care:"糖尿病 · 按时加餐"},
+  {i:17, n:"雷恩绥", b:"二姨一支", g:"沈阳中转", r:"二姨之子", uni:true},
+  {i:18, n:"刘雪莲", b:"二姨一支", g:"沈阳中转", r:"雷恩绥之妻 · 二姨的儿媳", uni:true},
+  {i:19, n:"雷林生", b:"二姨一支", g:"沈阳中转", r:"雷恩绥、刘雪莲长子 · 大连海事大学新生", uni:true, hl:true},
+  {i:20, n:"雷振生", b:"二姨一支", g:"沈阳中转", r:"雷恩绥、刘雪莲次子 · 雷林生之弟", uni:true},
+  {i:21, n:"金凤存", b:"雪莲亲友", g:"批次待定", r:"刘雪莲的母亲 · 二姨的亲家母", uni:true},
+  {i:22, n:"金茂栋", b:"雪莲亲友", g:"批次待定", r:"刘雪莲的舅舅", uni:true},
+  {i:23, n:"冶金莲", b:"雪莲亲友", g:"批次待定", r:"刘雪莲的舅母 · 金茂栋之妻", uni:true}
+];
+const BRANCHES = ["全部","二姨一支","四姨一支","五姨一支","六姨一支","大姨","雪莲亲友"];
+
+const FLIGHTS = [
+  {id:"shen", key:true, rt:"兰州 → 沈阳 → 大连", fno:"沈阳一日游已订", fd:"八月二十三日发团 · 二姨全家先行 · 转连车次待定",
+   seg:null,
+   rows:[
+    ["同行","二姨一家六口(15–20号)+ 六姨一家四口(11–14号),共十人:二姨、二姨夫、雷恩绥、刘雪莲、<b>雷林生</b>、雷振生、六姨张兰梅、六姨夫徐新莹、徐德浩、徐德泓;雪莲的母亲金凤存、舅舅金茂栋、舅母冶金莲是否同路待确认"],
+    ["沈阳一日游 · 八月二十三日","上午九点半发团:沈阳故宫 → 张学良旧居 → 赵一荻故居 → 午餐;下午乘车:北陵清昭陵 → 九一八历史博物馆 → 老北市 → 返回"],
+    ["儿童优惠","雷振生、徐德浩、徐德泓三个孩子无门票无讲解,现场每人补五十元车票即可(旅行社消息中写作「雷政生」,应为雷振生)——正与两家同行的名单对上了"],
+    ["走法","一日游次日转赴大连;沈阳到大连高铁约两小时、班次密,建议不晚于二十四日傍晚抵连与大部队会师;车次定了发我,一分钟补进这张卡"]
+   ]},
+  {id:"lz", rt:"兰州 → 大连", fno:"东航 MU9963", fd:"八月二十四日 · 空客三二〇 · 含正餐",
+   seg:{t1:"17:30", a1:"兰州中川机场 三号航站楼", dur:"二小时二十五分", t2:"19:55", a2:"大连周水子机场"},
+   rows:[
+    ["票面出行人","张兰翠、张莲凤、化清儒、化得莲(1–4号) · 订单实付 <b>¥4141</b>/四人"],
+    ["本批共四人","即票面四位:大姨、四姨、化清儒、化得莲;六姨一家四口已随二姨一家走沈阳线"],
+    ["落地衔接","19:55 到达后打车约二十分钟(约二十五元)直达星海广场酒店;上海批已先到,可请他们协助办理入住"]
+   ],
+   warn:"票面写作「张莲风」,名单为「张莲凤」——值机以身份证件为准,请出发前核对证件姓名,不符尽早联系平台修改。"},
+  {id:"sh", rt:"上海 → 大连", fno:"春秋 9C8977", fd:"八月二十四日 · 全团最早抵连",
+   seg:{t1:"14:00", a1:"上海浦东机场 二号航站楼", dur:"一小时五十五分", t2:"15:55", a2:"大连周水子机场"},
+   rows:[
+    ["票面出行人","彭华清、彭珺瑶、彭正弘、化得燕、张兰霞…(截图末尾被折叠,按批次推断还有安文明,共六人——请在订单里点开核对)"],
+    ["任务","15:55 最早落地——先到星海广场酒店办好全团入住,傍晚带瑶瑶、华清去广场喂鸽子,等兰州批 19:55 会合"],
+    ["提醒","春秋航班不供餐,午后起飞,给两个小朋友备好零食和水;三岁的华清记得带好推车"]
+   ],
+   warn:"孩子学名已按票面确认为「彭珺瑶」(家里叫瑶瑶);此前名单里的「彭瑶瑶」为小名写法,已更正,值机无碍。"},
+  {id:"back", rt:"大连 → 兰州(返程)", fno:"春秋 9C7387", fd:"八月三十日 · 兰州批返程",
+   seg:{t1:"06:45", a1:"大连周水子机场", dur:"二小时四十分", t2:"09:25", a2:"兰州中川机场 三号航站楼"},
+   rows:[
+    ["票面出行人","张兰翠、张莲凤、化清儒、化得莲(1–4号) · 订单实付 <b>¥3256</b>/四人"],
+    ["早起方案","06:45 起飞,05:00 前需到机场;二十九日晚早些收工,住处中山广场有地铁二号线直达机场,或前夜约好拼车"],
+    ["其余家人","上海批与沈阳批的返程票确认后补入;雷林生留连,正式开启海大生活"]
+   ],
+   warn:"此航班无餐食、无免费托运行李额——海产伴手礼要么控制随身重量,要么提前在线加购行李额,比柜台现补便宜得多。"}
+];
+
+const WX = {
+  m:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],
+  hi:[0,2,8,15,21,24,27,28,24,17,9,2],
+  lo:[-7,-5,0,7,13,17,21,22,17,10,2,-4],
+  rain:[9,8,16,34,53,92,180,170,68,33,21,12]
+};
+
+const SPOTS = [
+  {n:"金石滩地质公园", q:"金石滩国家旅游度假区", cat:"海滨风光", score:9.4, hrs:5, fee:"六十元", inPlan:"八月二十五日全天", tip:"从五号/七号门进;海蚀地貌步道+十里黄金海岸+金石万巷串成一整天,包车早出发避返程堵。", hl:true},
+  {n:"圣亚海洋世界", lng:121.5762, lat:38.8772, q:"大连圣亚海洋世界", cat:"海洋场馆", score:9.3, hrs:4, fee:"二百四十元", inPlan:"八月二十八日午后", tip:"四馆连游,白鲸与海豚表演提前查场次;馆内休息区多,适合长辈慢慢看。"},
+  {n:"星海广场", lng:121.594, lat:38.8855, q:"大连星海广场", cat:"海滨风光", score:9.0, hrs:2, fee:"免费", inPlan:"八月二十六日起 · 住处门口", tip:"后四晚就住在旁边,百年城雕、星海湾大桥观景台,傍晚随时下楼看日落。"},
+  {n:"旅顺口景区", q:"旅顺博物馆", cat:"人文街区", score:8.8, hrs:6, fee:"部分场馆另购", inPlan:"八月二十七日全天", tip:"车观军港、袖珍火车站,博物苑与海洋文化馆下车细看,跨海大桥收官——大半天以车代步,长辈最省力。"},
+  {n:"棒棰岛", lng:121.68, lat:38.893, q:"大连棒棰岛景区", cat:"海滨风光", score:8.7, hrs:2.5, fee:"二十元", inPlan:"八月二十六日上午", tip:"全市水质最佳的海滨之一,人少景美。"},
+  {n:"傅家庄浴场", lng:121.5998, lat:38.861, q:"大连傅家庄海滨浴场", cat:"海滨风光", score:8.5, hrs:1.5, fee:"免费", inPlan:"八月二十八日下午", tip:"老牌海滨浴场,八月末水温正舒服,沙滩缓适合带娃。"},
+  {n:"渔人码头", lng:121.6795, lat:38.8742, q:"大连渔人码头", cat:"海滨风光", score:8.4, hrs:1.5, fee:"免费", inPlan:"八月二十六日傍晚", tip:"定稿钦点的日落机位,彩色房子配晚霞;提前四十分钟到占位。"},
+  {n:"东港威尼斯水城", lng:121.6618, lat:38.9282, q:"大连东港威尼斯水城", cat:"海滨风光", score:8.3, hrs:2, fee:"免费(游船另计)", inPlan:"八月二十四日夜", tip:"重点看夜景——运河亮灯后才是它最美的样子;贡多拉夜航,离酒店步行即达,住东港两晚随时补看。"},
+  {n:"大连自然博物馆", lng:121.5528, lat:38.8657, q:"大连自然博物馆", cat:"海洋场馆", score:8.2, hrs:2, fee:"免费 · 需预约", inPlan:"八月二十九日午间", tip:"黑石礁海边的老牌博物馆,海兽标本馆值得细看;提前在公众号预约名额。"},
+  {n:"中山广场", lng:121.6295, lat:38.9218, q:"大连中山广场", cat:"人文街区", score:8.2, hrs:1, fee:"免费", inPlan:"八月二十四日傍晚", tip:"十大欧式建筑环绕,顺路去天津街晚餐。"},
+  {n:"星海公园", lng:121.5705, lat:38.875, q:"大连星海公园", cat:"公园亲子", score:8.0, hrs:1.5, fee:"免费", inPlan:"八月二十八日上午", tip:"住处步行可达,长辈遛弯、孩子赶海两不误。"},
+  {n:"东港音乐喷泉", lng:121.653, lat:38.9325, q:"大连东港音乐喷泉广场", cat:"海滨风光", score:8.0, hrs:1, fee:"免费", inPlan:"八月二十四日夜", tip:"与水城夜景连成一台夜场,场次多在夏季晚间;住东港的两晚随时能补看。"},
+  {n:"黑石礁公园", lng:121.5575, lat:38.8705, q:"大连黑石礁公园", cat:"公园亲子", score:7.9, hrs:1, fee:"免费", inPlan:"八月二十九日上午", tip:"海事大学隔壁的海边公园,报到日等候的家人在这里遛弯刚好。"},
+  {n:"天津街", lng:121.624, lat:38.9245, q:"大连天津街步行街", cat:"人文街区", score:7.9, hrs:2, fee:"免费", inPlan:"八月二十四日晚", tip:"老字号与小吃聚集,第一顿大连味在这里开张。"},
+  {n:"俄罗斯风情街", lng:121.6212, lat:38.9295, q:"大连俄罗斯风情街", cat:"人文街区", score:7.8, hrs:1.5, fee:"免费", inPlan:"八月二十四日白天", tip:"俄式建筑与小铺,步行即可逛完。"},
+  {n:"海纳百川雕塑公园", lng:121.5195, lat:38.8595, q:"大连海纳百川雕塑公园", cat:"海滨风光", score:7.8, hrs:1, fee:"免费", inPlan:"八月二十九日下午", tip:"海大旁的海滨雕塑园,报到日全员会合、给主角拍照的收官地。"},
+  {n:"滨海路木栈道", lng:121.604, lat:38.873, q:"大连滨海路木栈道", cat:"海滨风光", score:9.6, hrs:3.5, fee:"免费", inPlan:null, tip:"备选:西段(星海广场—傅家庄)风景最集中,哪天体力有余随时加。"},
+  {n:"老虎滩海洋公园", lng:121.669, lat:38.878, q:"大连老虎滩海洋公园", cat:"海洋场馆", score:9.2, hrs:5, fee:"约二百二十元", inPlan:null, tip:"备选:圣亚已过足海洋馆瘾,这里留给下次;带娃如有富余日可加。"}
+];
+const CATS = ["全部","海滨风光","海洋场馆","人文街区","公园亲子"];
+
+/* 七日行程(定稿版 · 依据家庭最终行程规划表) */
+const DAYS = [
+  {t:"抵连 · 东港夜景首秀", d:"八月二十四日 · 周一", stay:"宿东港威尼斯酒店", s:[
+    ["白天","先到的家人开逛老城线:俄罗斯风情街 → 中山广场",'俄式小铺与十大欧式建筑,步行串联;节奏放松,给晚上留体力'],
+    ["午后","上海批 15:55 落地 · 天津街会合",'春秋 9C8977 到达,机场打车约三十分钟先到酒店放行李;傍晚天津街老字号晚餐开吃第一顿'],
+    ["晚上","兰州批 19:55 抵连 · 全团入住",'东航 MU9963 到达后打车约二十五分钟直达东港威尼斯酒店;沈阳批按车次抵连'],
+    ["夜晚","东港威尼斯水城夜景 · 音乐喷泉",'重头戏在这儿——运河亮灯后才是水城最美的样子,贡多拉夜航、东港五街霓虹、音乐喷泉连成一台夜场;三批人无论几点到,这一场都赶得上,正好当会师仪式'],
+    ["提醒","常用药全员清点 · 四份重点盯牢",'大姨和二姨的降压药、二姨夫的降糖药与加餐点心、五姨夫的心脏用药——统一放随身小包,不托运;其余家人各自的常用药也当晚清点一遍,再备个分装药盒,每晚睡前把第二天的药理好']
+  ]},
+  {t:"金石滩一整天(包车)", d:"八月二十五日 · 周二", stay:"宿东港威尼斯酒店", s:[
+    ["早晨","包车早出发",'车程约五十公里、一小时;定稿特别注明早出发——傍晚返程方向易堵,早去早回两头都顺'],
+    ["上午","滨海国家地质公园",'从五号/七号门进,门票六十元;海蚀地貌步道慢慢走,长辈按体力走前半段即可'],
+    ["午间","一帆风顺广场 · 午餐",'广场周边简餐,饭后树荫下歇脚'],
+    ["下午","十里黄金海岸",'踩沙戏水,给珺瑶、华清、德浩、德泓留足撒欢时间;帐篷或遮阳伞记得问包车师傅借'],
+    ["傍晚","金石万巷 → 返程",'商业街逛吃小食,上车返回东港,正好避开堵点']
+  ]},
+  {t:"棒棰岛与日落 · 移驻星海(包车)", d:"八月二十六日 · 周三", stay:"移驻星海广场", s:[
+    ["上午","棒棰岛",'门票二十元;全市水质最佳的海滨之一,人少景美,慢节奏戏水拍照'],
+    ["午间","退房 · 行李随车",'包车直接载行李,不用回头再取;景区周边简餐'],
+    ["傍晚","渔人码头 · 看日落",'定稿钦点的日落机位;彩色房子配晚霞,提前四十分钟到占位'],
+    ["晚上","入住星海广场",'后四晚不再挪窝;饭后广场遛弯消食']
+  ]},
+  {t:"旅顺半岛环线(包车)", d:"八月二十七日 · 周四", stay:"宿星海广场", s:[
+    ["上午","车观旅顺军港 · 袖珍火车站",'两站均以车代步、下车拍照即走——这是给八位长辈安排的最省力玩法'],
+    ["午间","旅顺老城午餐",'本地菜馆,饭后车上小憩'],
+    ["下午","博物苑景区 → 海洋文化馆",'室内外结合,部分场馆门票现场另购;二姨夫记得按点加餐'],
+    ["傍晚","跨海大桥 → 返市区",'车观大桥收官,返程约一小时,长辈车上补觉']
+  ]},
+  {t:"星海一线亲子日", d:"八月二十八日 · 周五", stay:"宿星海广场", s:[
+    ["上午","星海公园",'住处步行可达的老牌海滨公园,长辈遛弯、孩子赶海'],
+    ["午间","圣亚海洋世界",'门票二百四十元;海洋馆→极地馆→珊瑚馆→银河星海馆,白鲸与海豚表演提前查场次;馆内休息区多,五姨夫按自己节奏走,累了随时坐'],
+    ["下午","傅家庄浴场",'踩沙踏浪,八月末水温正舒服;体力有限的长辈沙滩阴凉处歇着看娃']
+  ]},
+  {t:"报到日 · 海大及周边", d:"八月二十九日 · 周六", stay:"宿星海广场", key:true, s:[
+    ["上午","送学组进校 · 其余家人黑石礁公园",'送学组九人陪<b>雷林生</b>进校报到:导航「大连海事大学」<b>主校区</b>(甘井子区凌海路一号),打车定位<b>东南门</b>——九成到访者从这里进;校园依山有坡,二姨、二姨夫量力慢行,校内可乘摆渡车。其余家人就在隔壁黑石礁公园海边遛弯等候'],
+    ["午间","大连自然博物馆",'就在黑石礁,免费但需提前在公众号预约——今晚就把二十九日的名额约上;室内恒温,老人小孩都舒服'],
+    ["下午","海纳百川雕塑公园 · 全员会合",'海大旁的海滨雕塑园,送学组安顿完宿舍步行即到;在这里给主角拍够照片'],
+    ["晚上","星海广场夜色收官",'回住处旁看夜景喷泉,给七天画句号']
+  ]},
+  {t:"返程日", d:"八月三十日 · 周日", stay:"各自返程", s:[
+    ["清晨","兰州批 06:45 起飞",'春秋 9C7387;星海广场至机场约十四公里,凌晨打车或前夜约好拼车约三十分钟,05:00 前到达——地铁头班车赶不上这趟,别指望地铁;无免费托运行李额,伴手礼注意重量;长辈们二十九日晚九点前休息;大姨早起赶路前先把当天的降压药吃上'],
+    ["上午","其余家人陆续返程",'上海批与沈阳批按各自航班车次出发;与雷林生道别'],
+    ["午间","主角留连",'雷林生留在大连,正式开启海大生活——常回家,也常打电话']
+  ]}
+];
+
+const BUDGET = {
+  eco:  {住宿:180, 餐饮:120, 市内交通:30,  门票娱乐:90},
+  mid:  {住宿:380, 餐饮:220, 市内交通:60,  门票娱乐:150},
+  high: {住宿:780, 餐饮:400, 市内交通:120, 门票娱乐:220}
+};
+/* 整租民宿:旺季整套价按人头折算(大平层约八至一千二/晚住八到十人;独栋更高) */
+const MINSU = {eco:110, mid:170, high:300};
+const STAY_NAME = {hotel:"酒店拼房", minsu:"整租民宿"};
+const TRIP_DAYS = 7;
+const GRADE_NAME = {eco:"经济型", mid:"舒适型", high:"品质型"};
+const BUD_COLORS = {住宿:"var(--sea)", 餐饮:"var(--warm)", 市内交通:"var(--leaf)", 门票娱乐:"var(--gold)"};
+
+const FOODS = [
+  {n:"海胆蒸蛋", p:"约三十八元/份", t:"八月末海胆正肥,黄澄澄一勺入口即化。"},
+  {n:"盐水虾爬子", p:"约六十元/斤", t:"应季满黄,盐水一煮足矣,老人小孩都爱。"},
+  {n:"焖子", p:"约十元/份", t:"地瓜粉煎至外焦里糯,淋麻酱蒜汁,大连限定;给华清、瑶瑶各来小份。"},
+  {n:"海鲜烧烤", p:"约八十元/人", t:"现烤生蚝扇贝配冰镇饮品;天津街与东港五街都有好摊位。"},
+  {n:"铁板鱿鱼", p:"约十五元/串", t:"天津街夜市标配,现烤现刷酱,越焦边越香。"},
+  {n:"辣炒蚬子", p:"约三十元/盘", t:"花蚬配青辣椒爆炒,配冰镇鲜啤是本地吃法。"},
+  {n:"咸鱼饼子", p:"约二十五元/套", t:"老式渔家饭,玉米饼子贴锅边,越嚼越香。"},
+  {n:"海凉粉", p:"约十二元/碗", t:"海石花熬制,夏末来一碗透心凉。"}
+];
+
+/* ============ 导航链接(高德/百度,免密钥)============
+   有坐标的点位直接落针(高德用GCJ坐标;百度链接声明coord_type=gcj02由其自动换算,避免坐标系偏移);
+   大范围景区用地图必然收录的规范名称检索。 */
+function navA(s){
+  if(s.lng) return "https://uri.amap.com/marker?position=" + s.lng + "," + s.lat + "&name=" + encodeURIComponent(s.n) + "&src=dltrip&coordinate=gaode&callnative=1";
+  return "https://uri.amap.com/search?keyword=" + encodeURIComponent(s.q) + "&city=大连&view=map&callnative=1";
+}
+function navB(s){
+  if(s.lng) return "https://api.map.baidu.com/marker?location=" + s.lat + "," + s.lng + "&title=" + encodeURIComponent(s.n) + "&content=" + encodeURIComponent("大连送学手册") + "&coord_type=gcj02&output=html&src=webapp.family.dltrip";
+  return "https://api.map.baidu.com/place/search?query=" + encodeURIComponent(s.q) + "&region=大连&output=html&src=webapp.family.dltrip";
+}
+function navHTML(s){ return `<span class="navlinks"><a href="${navA(s)}" target="_blank" rel="noopener">高德</a><a href="${navB(s)}" target="_blank" rel="noopener">百度</a></span>`; }
+
+/* ============ 通用工具 ============ */
+const $ = s => document.querySelector(s);
+const CN = {1:"一",2:"二",3:"三",4:"四",5:"五",6:"六",7:"七",9:"九",23:"二十三"};
+const tt = $("#tt");
+function showTT(html,x,y){
+  tt.innerHTML = html; tt.style.opacity = 1;
+  const r = tt.getBoundingClientRect();
+  let px = x + 14, py = y + 14;
+  if(px + r.width > innerWidth - 8) px = x - r.width - 14;
+  if(py + r.height > innerHeight - 8) py = y - r.height - 14;
+  tt.style.left = px + "px"; tt.style.top = py + "px";
+}
+function hideTT(){ tt.style.opacity = 0; }
+function bindToggle(el, cb){
+  el.addEventListener("click", e=>{
+    const b = e.target.closest("button"); if(!b) return;
+    el.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed", x===b ? "true":"false"));
+    cb(b.dataset);
+  });
+}
+
+/* ============ 一、航班 ============ */
+function renderFlights(){
+  $("#flights").innerHTML = FLIGHTS.map((f,i)=>`
+    <div class="flight${f.key?" key":""}${i===0?" open":""}" data-id="${f.id}">
+      <button class="flight-h" aria-expanded="${i===0}">
+        <span class="rt">${f.rt}</span>
+        <span class="fno">${f.fno}</span>
+        <span class="fd">${f.fd}</span>
+        <span class="arrow">▼</span>
+      </button>
+      <div class="flight-b">
+        ${f.seg?`<div class="seg">
+          <span><span class="tp">${f.seg.t1}</span><br><span class="ap">${f.seg.a1}</span></span>
+          <span class="dur">${f.seg.dur}</span>
+          <span><span class="tp">${f.seg.t2}</span><br><span class="ap">${f.seg.a2}</span></span>
+        </div>`:""}
+        ${f.rows.map(r=>`<div class="frow"><b>${r[0]}</b> · ${r[1]}</div>`).join("")}
+        ${f.warn?`<div class="warn">⚠ ${f.warn}</div>`:""}
+      </div>
+    </div>`).join("");
+}
+$("#flights").addEventListener("click", e=>{
+  const h = e.target.closest(".flight-h"); if(!h) return;
+  const card = h.closest(".flight");
+  card.classList.toggle("open");
+  h.setAttribute("aria-expanded", card.classList.contains("open"));
+});
+
+/* ============ 二、名单 ============ */
+let rosterState = {branch:"全部", batch:"全部", mode:"all"};
+function renderRoster(){
+  $("#branchChips").innerHTML = BRANCHES.map(b=>
+    `<button aria-pressed="${rosterState.branch===b}" data-b="${b}">${b}</button>`).join("");
+  const list = PEOPLE.filter(p=>
+    (rosterState.branch==="全部" || p.b===rosterState.branch) &&
+    (rosterState.batch==="全部" || p.g===rosterState.batch) &&
+    (rosterState.mode==="all" || (rosterState.mode==="uni" ? p.uni : p.care)));
+  const cap = rosterState.mode==="uni" ? "(八月二十九日进校送学组)"
+            : rosterState.mode==="care" ? "(健康备注,行前请再核对一遍随身药)"
+            : "(全团二十三人 · 送学组九人 · 长辈八人,三位年过七旬)";
+  $("#pcount").innerHTML = `当前显示 <b>${list.length}</b> 人${cap}`;
+  $("#people").innerHTML = list.map(p=>`
+    <div class="person${p.hl?" hl":""}">
+      <span class="no">${p.i} 号</span>
+      <div class="pn">${p.n}</div>
+      <div class="pr">${p.r}${p.age?` · ${p.age}`:""}</div>
+      ${p.hl?`<span class="badge hot">主角 · 海事大学新生</span>`:""}
+      ${p.uni&&!p.hl?`<span class="badge">8·29 进校送学</span>`:""}
+      ${p.care?`<span class="badge care">${p.care}</span>`:""}
+      <span class="badge soft">${p.g}</span>
+      ${p.elder?`<span class="badge soft">${p.eb||"年过六旬"}</span>`:""}
+      ${p.age?`<span class="badge soft">小朋友</span>`:""}
+    </div>`).join("");
+}
+$("#branchChips").addEventListener("click", e=>{
+  const b = e.target.closest("button"); if(!b) return;
+  rosterState.branch = b.dataset.b; renderRoster();
+});
+bindToggle($("#batchTog"), d=>{ rosterState.batch = d.t; renderRoster(); });
+bindToggle($("#uniTog"), d=>{ rosterState.mode = d.u; renderRoster(); });
+
+/* ============ 三、气候图 ============ */
+let wxState = {rain:true, focus:null};
+function renderWX(){
+  const host = $("#wx_chart");
+  const W = Math.max(320, host.clientWidth), H = 270;
+  const P = {l:40, r:44, t:14, b:26};
+  const iw = W - P.l - P.r, ih = H - P.t - P.b;
+  const n = 12;
+  const xc = i => P.l + iw * (i + .5) / n;
+  const tMin = -10, tMax = 32;
+  const ty = v => P.t + ih * (1 - (v - tMin)/(tMax - tMin));
+  const rMax = 200;
+  const ry = v => P.t + ih * (1 - v/rMax);
+
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="大连全年气温与降水图">`;
+  for(let g=-10; g<=30; g+=10){
+    s += `<line class="gl" x1="${P.l}" y1="${ty(g)}" x2="${W-P.r}" y2="${ty(g)}"/>`;
+    s += `<text class="tick y" x="${P.l-8}" y="${ty(g)+4}">${g}°</text>`;
+  }
+  if(wxState.rain){
+    for(let g=100; g<=200; g+=100){
+      s += `<text class="tick" x="${W-P.r+8}" y="${ry(g)+4}" fill="var(--leaf)">${g}毫米</text>`;
+    }
+  }
+  s += `<line class="axl" x1="${P.l}" y1="${P.t+ih}" x2="${W-P.r}" y2="${P.t+ih}"/>`;
+  WX.m.forEach((m,i)=>{ s += `<text class="tick" x="${xc(i)}" y="${H-8}" text-anchor="middle">${m}</text>`; });
+
+  if(wxState.rain){
+    const bw = Math.min(26, iw/n*.5);
+    const dim = wxState.focus && wxState.focus!=="rain" ? .12 : .28;
+    WX.rain.forEach((v,i)=>{
+      s += `<rect class="rainbar" style="opacity:${dim}" x="${xc(i)-bw/2}" y="${ry(v)}" width="${bw}" height="${P.t+ih-ry(v)}" rx="3"/>`;
+    });
+  }
+  const mkPath = arr => arr.map((v,i)=>`${i?"L":"M"}${xc(i).toFixed(1)},${ty(v).toFixed(1)}`).join("");
+  const op = k => wxState.focus && wxState.focus!==k ? .18 : 1;
+  s += `<path class="line" style="stroke:var(--warm);opacity:${op("hi")}" d="${mkPath(WX.hi)}"/>`;
+  s += `<path class="line" style="stroke:var(--sea);opacity:${op("lo")}" d="${mkPath(WX.lo)}"/>`;
+  s += `<g id="wx_hover"></g></svg>`;
+  host.innerHTML = s;
+
+  const svg = host.querySelector("svg");
+  svg.addEventListener("pointermove", e=>{
+    const rect = svg.getBoundingClientRect();
+    const mx = (e.clientX - rect.left) * (W / rect.width);
+    let i = Math.round((mx - P.l)/iw*n - .5);
+    i = Math.max(0, Math.min(n-1, i));
+    const g = svg.querySelector("#wx_hover");
+    g.innerHTML =
+      `<line class="cross" x1="${xc(i)}" y1="${P.t}" x2="${xc(i)}" y2="${P.t+ih}"/>` +
+      `<circle class="foc" cx="${xc(i)}" cy="${ty(WX.hi[i])}" r="4.5" fill="var(--warm)"/>` +
+      `<circle class="foc" cx="${xc(i)}" cy="${ty(WX.lo[i])}" r="4.5" fill="var(--sea)"/>`;
+    showTT(
+      `<div class="tq">${WX.m[i]}</div>`+
+      `<div class="r"><span class="lft"><span class="dot" style="background:var(--warm)"></span>平均高温</span><span class="val">${WX.hi[i]} 摄氏度</span></div>`+
+      `<div class="r"><span class="lft"><span class="dot" style="background:var(--sea)"></span>平均低温</span><span class="val">${WX.lo[i]} 摄氏度</span></div>`+
+      `<div class="r"><span class="lft"><span class="dot" style="background:var(--leaf)"></span>降水量</span><span class="val">${WX.rain[i]} 毫米</span></div>`,
+      e.clientX, e.clientY);
+  });
+  svg.addEventListener("pointerleave", ()=>{
+    svg.querySelector("#wx_hover").innerHTML = ""; hideTT();
+  });
+}
+bindToggle($("#rainTog"), d=>{ wxState.rain = d.r==="1"; renderWX(); });
+$("#wx_legend").addEventListener("mouseover", e=>{
+  const it = e.target.closest(".it"); if(!it) return;
+  wxState.focus = it.dataset.k; renderWX();
+});
+$("#wx_legend").addEventListener("mouseleave", ()=>{ wxState.focus = null; renderWX(); });
+
+/* ============ 四、行程 ============ */
+let itinState = {pick:0};
+function renderItin(){
+  const cn = ["第一天","第二天","第三天","第四天","第五天","第六天","第七天"];
+  let ch = `<button aria-pressed="${itinState.pick===0}" data-d="0">全部展开</button>`;
+  DAYS.forEach((d,i)=>{ ch += `<button aria-pressed="${itinState.pick===i+1}" data-d="${i+1}">${cn[i]}</button>`; });
+  $("#dayChips").innerHTML = ch;
+
+  $("#days").innerHTML = DAYS.map((d,i)=>{
+    if(itinState.pick!==0 && itinState.pick!==i+1) return "";
+    return `<div class="day${d.key?" key":""}"><h3><span class="dn">${cn[i]}</span>${d.t}<span class="dt">${d.d}</span><span class="stay">${d.stay}</span></h3><ul class="stops">`+
+      d.s.map(x=>`<li><span class="tm">${x[0]}</span><span><b>${x[1]}</b><span class="go">${x[2]}</span></span></li>`).join("")+
+      `</ul></div>`;
+  }).join("");
+}
+$("#dayChips").addEventListener("click", e=>{
+  const b = e.target.closest("button"); if(!b) return;
+  itinState.pick = +b.dataset.d; renderItin();
+});
+bindToggle($("#goTog"), d=>{ document.body.classList.toggle("hidego", d.g==="0"); });
+
+/* ============ 五、景点 ============ */
+let spotState = {cat:"全部", sort:"score", onlyPlan:false};
+function renderSpotChips(){
+  $("#spotChips").innerHTML = CATS.map(c=>
+    `<button aria-pressed="${spotState.cat===c}" data-c="${c}">${c}</button>`).join("");
+}
+function renderSpots(){
+  const list = SPOTS
+    .filter(s => (spotState.cat==="全部" || s.cat===spotState.cat) && (!spotState.onlyPlan || s.inPlan))
+    .sort((a,b)=> b[spotState.sort]-a[spotState.sort]);
+  const max = spotState.sort==="score" ? 10 : Math.max(...SPOTS.map(s=>s.hrs));
+  const host = $("#spots");
+  host.innerHTML = list.map(s=>{
+    const v = s[spotState.sort];
+    const val = spotState.sort==="score" ? v.toFixed(1)+" 分" : v+" 小时";
+    return `<div class="barrow${s.hl?" hl":""}" data-i="${SPOTS.indexOf(s)}">
+      <span class="nm">${s.n}</span>
+      <span class="bartrack"><span class="barfill" style="width:0%${s.inPlan?"":";opacity:.45"}" data-w="${(v/max*100).toFixed(1)}"></span></span>
+      <span class="barval">${val}</span>
+      ${navHTML(s)}</div>`;
+  }).join("");
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    host.querySelectorAll(".barfill").forEach(f=> f.style.width = f.dataset.w + "%");
+  }));
+}
+$("#spotChips").addEventListener("click", e=>{
+  const b = e.target.closest("button"); if(!b) return;
+  spotState.cat = b.dataset.c; renderSpotChips(); renderSpots();
+});
+bindToggle($("#sortTog"), d=>{ spotState.sort = d.s; renderSpots(); });
+bindToggle($("#planTog"), d=>{ spotState.onlyPlan = d.o==="in"; renderSpots(); });
+$("#spots").addEventListener("pointermove", e=>{
+  const row = e.target.closest(".barrow");
+  if(!row){ hideTT(); return; }
+  const s = SPOTS[+row.dataset.i];
+  showTT(
+    `<div class="tq">${s.n} · ${s.cat}</div>`+
+    `<div class="r"><span class="lft">推荐指数</span><span class="val">${s.score.toFixed(1)} 分</span></div>`+
+    `<div class="r"><span class="lft">建议时长</span><span class="val">${s.hrs} 小时</span></div>`+
+    `<div class="r"><span class="lft">门票</span><span class="val">${s.fee}</span></div>`+
+    `<div class="r"><span class="lft">行程位置</span><span class="val">${s.inPlan||"备选未排"}</span></div>`+
+    `<div class="tip">${s.tip}</div>`,
+    e.clientX, e.clientY);
+});
+$("#spots").addEventListener("pointerleave", hideTT);
+
+/* ============ 六、美食 ============ */
+function renderFoods(){
+  $("#foods").innerHTML = FOODS.map(f=>
+    `<div class="food"><div class="fn">${f.n}</div><div class="fp">${f.p}</div><div class="ft">${f.t}</div></div>`
+  ).join("");
+}
+
+/* ============ 七、预算 ============ */
+let budState = {grade:"mid", ppl:23, view:"daily", stay:"hotel"};
+function renderBudget(){
+  const base = BUDGET[budState.grade];
+  const days = TRIP_DAYS, ppl = budState.ppl;
+  const perDaily = Object.assign({}, base);
+  if(budState.stay==="minsu"){
+    perDaily.住宿 = MINSU[budState.grade];            // 整租按人头折算
+  }else if(ppl >= 2){
+    perDaily.住宿 = Math.round(base.住宿 * 0.65);     // 酒店拼房折算
+  }
+  const keys = Object.keys(perDaily);
+  const factor = budState.view==="daily" ? 1 : days * ppl;
+  const vals = keys.map(k => perDaily[k] * factor);
+  const max = Math.max(...vals);
+  $("#budget").innerHTML = keys.map((k,i)=>`
+    <div class="barrow">
+      <span class="nm">${k}</span>
+      <span class="bartrack"><span class="barfill" style="width:0%;background:${BUD_COLORS[k]}" data-w="${(vals[i]/max*100).toFixed(1)}"></span></span>
+      <span class="barval">¥ ${vals[i].toLocaleString("zh-CN")}</span>
+    </div>`).join("");
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    document.querySelectorAll("#budget .barfill").forEach(f=> f.style.width = f.dataset.w + "%");
+  }));
+
+  const perDay = keys.reduce((a,k)=>a+perDaily[k],0);
+  const perTrip = perDay * days;
+  const grand = perTrip * ppl;
+  $("#bsum").innerHTML =
+    `<span>人均每日 <b>¥ ${perDay.toLocaleString("zh-CN")}</b></span>`+
+    `<span>人均全程(${CN[days]}天) <span class="big">¥ ${perTrip.toLocaleString("zh-CN")}</span></span>`+
+    `<span>${CN[ppl]}人合计 <b>¥ ${grand.toLocaleString("zh-CN")}</b> · ${GRADE_NAME[budState.grade]} · ${STAY_NAME[budState.stay]}</span>`;
+  $("#t3").innerHTML = `${perTrip.toLocaleString("zh-CN")}<small> 元</small>`;
+  $("#t3d").textContent = `${GRADE_NAME[budState.grade]} · ${STAY_NAME[budState.stay]} · 七天地面开销 · ${CN[ppl]}人口径 · 机票另计`;
+}
+bindToggle($("#stayTog"), d=>{ budState.stay = d.m; renderBudget(); });
+bindToggle($("#gradeTog"), d=>{ budState.grade = d.g; renderBudget(); });
+bindToggle($("#viewTog"), d=>{ budState.view = d.v; renderBudget(); });
+$("#pplPick").addEventListener("change", e=>{ budState.ppl = +e.target.value; renderBudget(); });
+
+/* ============ 常用导航面板 ============ */
+function renderQnav(){
+  const anchors=[
+    {n:"东港威尼斯酒店", lng:121.6618, lat:38.9282},
+    {n:"星海广场(住宿)", lng:121.5940, lat:38.8855},
+    {n:"海事大学东南门", lng:121.5290, lat:38.8645},
+    {n:"周水子机场", lng:121.5386, lat:38.9639},
+    {n:"金石滩度假区", q:"金石滩国家旅游度假区"},
+    {n:"旅顺博物馆", q:"旅顺博物馆"}
+  ];
+  $("#qnav").innerHTML = anchors.map(a=>`<span class="qn"><b>${a.n}</b>${navHTML(a)}</span>`).join("");
+}
+
+/* ============ 启动 ============ */
+let rT;
+addEventListener("resize", ()=>{ clearTimeout(rT); rT = setTimeout(renderWX, 120); });
+renderFlights();
+renderRoster();
+renderWX();
+renderQnav();
+renderItin();
+renderSpotChips();
+renderSpots();
+renderFoods();
+renderBudget();
+</script>
+</body>
+</html>
